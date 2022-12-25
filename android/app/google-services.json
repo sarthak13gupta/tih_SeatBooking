@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "322531788955",
+    "project_id": "smart-parking-app-tih",
+    "storage_bucket": "smart-parking-app-tih.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:322531788955:android:1c7cccd3228a67fe0ede3e",
+        "android_client_info": {
+          "package_name": "com.example.seat_layout"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "322531788955-1576t0n3ub1rj2rv60dvi5nelcv39aiq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4jf_WMlUObgs7jIObJ7wA-2oHU0KMTvE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "322531788955-1576t0n3ub1rj2rv60dvi5nelcv39aiq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "322531788955-dfaatqa1f056dsacji3kc8mk50q59t5s.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.smartParkingApp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:322531788955:android:9f82e40a340db9aa0ede3e",
+        "android_client_info": {
+          "package_name": "com.example.smart_parking_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "322531788955-1576t0n3ub1rj2rv60dvi5nelcv39aiq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4jf_WMlUObgs7jIObJ7wA-2oHU0KMTvE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "322531788955-1576t0n3ub1rj2rv60dvi5nelcv39aiq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "322531788955-dfaatqa1f056dsacji3kc8mk50q59t5s.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.smartParkingApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
