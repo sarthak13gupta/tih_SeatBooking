@@ -7,7 +7,9 @@ import 'package:seat_layout/widgets/parkingSlot.dart';
 // import 'package:flutter/src/widgets/framework.dart';
 
 class SeatLayoutBottom extends StatefulWidget {
-  const SeatLayoutBottom({Key? key}) : super(key: key);
+  final List<Slot> seatBottomList;
+  const SeatLayoutBottom({Key? key, required this.seatBottomList})
+      : super(key: key);
 
   @override
   State<SeatLayoutBottom> createState() => _SeatLayoutBottomState();
@@ -16,8 +18,6 @@ class SeatLayoutBottom extends StatefulWidget {
 class _SeatLayoutBottomState extends State<SeatLayoutBottom> {
   @override
   Widget build(BuildContext context) {
-    final providerData = Provider.of<SlotProvider>(context);
-    final seatBottomList = providerData.seatBottom;
     return Container(
       padding: const EdgeInsets.all(10),
       height: 200,
@@ -31,7 +31,7 @@ class _SeatLayoutBottomState extends State<SeatLayoutBottom> {
           mainAxisExtent: 100,
         ),
         children: <Widget>[
-          ...seatBottomList.map((value) {
+          ...widget.seatBottomList.map((value) {
             return ParkingSlot(ValueKey(value.id), value.available);
           })
         ],

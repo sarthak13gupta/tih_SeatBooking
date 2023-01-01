@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:seat_layout/data/handlingData.dart';
+import 'package:seat_layout/providers/slotProvider.dart';
 import 'package:seat_layout/screens/seat_location_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase/firebase_options.dart';
@@ -40,11 +42,14 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
+    return ChangeNotifierProvider(
+      create: (ctx) => SlotProvider(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(widget.title),
+        ),
+        body: const SeatLocationScreen(),
       ),
-      body: const SeatLocationScreen(),
     );
   }
 }

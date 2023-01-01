@@ -9,8 +9,8 @@ class SlotProvider with ChangeNotifier {
   List<Slot> _seatTop = [];
   List<Slot> _seatBottom = [];
 
-  void extractData() async {
-    print('hi');
+  Future<Set<List<Slot>>> extractData() async {
+    // print('hi');
     List<Slot> seatTopLocal = [];
     List<Slot> seatBottomLocal = [];
     await firestore
@@ -33,7 +33,9 @@ class SlotProvider with ChangeNotifier {
     _seatTop = seatTopLocal;
     _seatBottom = seatBottomLocal;
 
-    notifyListeners();
+    return {_seatTop, _seatBottom};
+
+    // notifyListeners();
   }
 
   List<Slot> get seatTop {

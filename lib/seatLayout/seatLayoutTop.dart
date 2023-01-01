@@ -1,10 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:seat_layout/model/slot.dart';
 import 'package:seat_layout/widgets/parkingSlot.dart';
 import 'package:seat_layout/providers/slotProvider.dart';
 
 class SeatLayoutTop extends StatefulWidget {
-  const SeatLayoutTop({Key? key}) : super(key: key);
+  final List<Slot> seatTopList;
+  const SeatLayoutTop({Key? key, required this.seatTopList}) : super(key: key);
 
   @override
   State<SeatLayoutTop> createState() => _SeatLayoutTopState();
@@ -13,10 +16,6 @@ class SeatLayoutTop extends StatefulWidget {
 class _SeatLayoutTopState extends State<SeatLayoutTop> {
   @override
   Widget build(BuildContext context) {
-    final providerData = Provider.of<SlotProvider>(context);
-    providerData.extractData();
-    final seatTopList = providerData.seatTop;
-
     return Container(
       padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
       height: 300,
@@ -30,8 +29,11 @@ class _SeatLayoutTopState extends State<SeatLayoutTop> {
           mainAxisSpacing: 20,
         ),
         children: <Widget>[
-          ...seatTopList.map<dynamic>(
-              (value) => ParkingSlot(ValueKey(value.id), value.available)),
+          ...widget.seatTopList.map((value) {
+            // print('hi');
+            // const Text('hi');
+            return ParkingSlot(ValueKey(value.id), value.available);
+          })
         ],
       ),
     );
