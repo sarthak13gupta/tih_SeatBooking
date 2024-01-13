@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:seat_layout/model/slot.dart';
-import 'package:seat_layout/providers/slotProvider.dart';
 import 'package:seat_layout/widgets/parkingSlot.dart';
 // import 'package:flutter/src/foundation/key.dart';
 // import 'package:flutter/src/widgets/framework.dart';

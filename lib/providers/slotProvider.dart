@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:seat_layout/model/slot.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -18,7 +17,7 @@ class SlotProvider with ChangeNotifier {
         .orderBy('index', descending: false)
         .get()
         .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
+      for (var doc in querySnapshot.docs) {
         var index = doc['index'];
         var available = doc['available'];
         print(doc.id);
@@ -27,7 +26,7 @@ class SlotProvider with ChangeNotifier {
         } else {
           seatBottomLocal.add(Slot(doc.id, index, available));
         }
-      });
+      }
     });
 
     _seatTop = seatTopLocal;

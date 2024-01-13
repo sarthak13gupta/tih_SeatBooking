@@ -1,9 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:seat_layout/model/slot.dart';
 import 'package:seat_layout/widgets/parkingSlot.dart';
-import 'package:seat_layout/providers/slotProvider.dart';
 
 class SeatLayoutTop extends StatefulWidget {
   final List<Slot> seatTopList;
