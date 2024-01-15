@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:seat_layout/providers/slotProvider.dart';
+import 'package:seat_layout/screens/details_page.dart';
 import 'package:seat_layout/seatLayout/seatLayoutBottom.dart';
 import 'package:seat_layout/seatLayout/seatLayoutTop.dart';
 
@@ -19,6 +20,8 @@ class _SelectLocationState extends State<SeatLocationScreen> {
   List<Slot> seatTopList = [];
   List<Slot> seatBottomList = [];
   bool isLoading = true;
+  List<Slot> selectedSeatList = [];
+  late SlotProvider providerData;
 
   @override
   void initState() {
@@ -27,43 +30,71 @@ class _SelectLocationState extends State<SeatLocationScreen> {
         .collection('carSlots')
         .snapshots()
         .listen((event) {
-      final providerData = Provider.of<SlotProvider>(context, listen: false);
-      isLoading = true;
-      providerData.extractData().then((response) {
-        setState(() {
-          seatTopList = response.first;
-          seatBottomList = response.last;
-        });
-        // print('hi');
-      });
-      isLoading = false;
+      _fetchProviderData();
     });
+  }
+
+  _fetchProviderData() {
+    providerData = Provider.of<SlotProvider>(context, listen: false);
+    isLoading = true;
+    providerData.extractData().then((response) {
+      setState(() {
+        seatTopList = response.first;
+        seatBottomList = response.last;
+        selectedSeatList = providerData.selectedSlot;
+      });
+    });
+    isLoading = false;
   }
 
   @override
   Widget build(BuildContext context) {
-    print(isLoading);
+    _fetchProviderData();
     return isLoading
         ? const Center(
             child: Text('Loading'),
           )
-        : Stack(
-            children: <Widget>[
-              Positioned(
-                left: 10,
-                top: 20,
-                child: SeatLayoutTop(seatTopList: seatTopList),
+        : Column(
+            children: [
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Basement 1",
+                      style: TextStyle(fontSize: 25),
+                    ),
+                    Icon(
+                      Icons.arrow_forward_ios,
+                    )
+                  ],
+                ),
               ),
-              Positioned(
-                left: 10,
-                bottom: 200,
-                child: SeatLayoutBottom(seatBottomList: seatBottomList),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(
+                      child: SeatLayoutTop(seatTopList: seatTopList),
+                    ),
+                    SizedBox(
+                      child: SeatLayoutBottom(seatBottomList: seatBottomList),
+                    ),
+                  ],
+                ),
               ),
-              Positioned(
-                  left: 150,
-                  bottom: 50,
-                  child: ElevatedButton(
-                      onPressed: (() => {}), child: const Text('book')))
+              FloatingActionButton.extended(
+                  onPressed: () {
+                    // move to details page
+                    selectedSeatList.isNotEmpty
+                        ? Navigator.of(context).push(MaterialPageRoute(
+                            builder: (_) => const DetailsPage()))
+                        : null;
+                  },
+                  label: const Text("Select slot"))
             ],
           );
   }

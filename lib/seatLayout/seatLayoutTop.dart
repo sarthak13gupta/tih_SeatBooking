@@ -27,9 +27,12 @@ class _SeatLayoutTopState extends State<SeatLayoutTop> {
         ),
         children: <Widget>[
           ...widget.seatTopList.map((value) {
-            // print('hi');
-            // const Text('hi');
-            return ParkingSlot(ValueKey(value.id), value.available);
+            return ParkingSlot(
+              key: ValueKey(value.id),
+              available: value.available,
+              selected: value.selected,
+              slot: value,
+            );
           })
         ],
       ),

@@ -3,13 +3,12 @@ import 'package:seat_layout/model/slot.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SlotProvider with ChangeNotifier {
-  // List<Slot> data = [];
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   List<Slot> _seatTop = [];
   List<Slot> _seatBottom = [];
+  List<Slot> _selectedSlot = [];
 
   Future<Set<List<Slot>>> extractData() async {
-    // print('hi');
     List<Slot> seatTopLocal = [];
     List<Slot> seatBottomLocal = [];
     await firestore
@@ -20,11 +19,20 @@ class SlotProvider with ChangeNotifier {
       for (var doc in querySnapshot.docs) {
         var index = doc['index'];
         var available = doc['available'];
-        print(doc.id);
+        var selected = doc['selected'];
         if (index <= 4) {
-          seatTopLocal.add(Slot(doc.id, index, available));
+          seatTopLocal.add(Slot(
+              id: doc.id,
+              index: index,
+              available: available,
+              selected: selected));
         } else {
-          seatBottomLocal.add(Slot(doc.id, index, available));
+          seatBottomLocal.add(Slot(
+            id: doc.id,
+            index: index,
+            available: available,
+            selected: selected,
+          ));
         }
       }
     });
@@ -33,8 +41,14 @@ class SlotProvider with ChangeNotifier {
     _seatBottom = seatBottomLocal;
 
     return {_seatTop, _seatBottom};
+  }
 
-    // notifyListeners();
+  void setSelectedSlots(List<Slot> parkingSlot) {
+    _selectedSlot = parkingSlot;
+  }
+
+  List<Slot> get selectedSlot {
+    return [..._selectedSlot];
   }
 
   List<Slot> get seatTop {

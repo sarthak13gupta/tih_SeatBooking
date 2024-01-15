@@ -30,7 +30,12 @@ class _SeatLayoutBottomState extends State<SeatLayoutBottom> {
         ),
         children: <Widget>[
           ...widget.seatBottomList.map((value) {
-            return ParkingSlot(ValueKey(value.id), value.available);
+            return ParkingSlot(
+              key: ValueKey(value.id),
+              available: value.available,
+              selected: value.selected,
+              slot: value,
+            );
           })
         ],
       ),
